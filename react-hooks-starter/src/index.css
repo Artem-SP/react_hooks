@@ -36,13 +36,7 @@ code {
 
 .blog-content {
   min-height: calc(100vh - 160px);
-}
-
-.form {
-  padding-top: 74px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 42rem;
+  padding-top: 50px;
 }
 
 .article-content {
@@ -77,18 +71,6 @@ code {
 
 .checkbox {
 	
-}
-
-.tabs button {
-  background: #021529;
-  color: #fff;
-  border: none;
-  outline: none;
-  font-size: 17px;
-  cursor: pointer;
-}
-.app.dark .tabs button {
-  background: #282c35;
 }
 
 .custom-checkbox {
