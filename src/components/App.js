@@ -1,64 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import PostList from "./PostList";
 import Footer from "./Footer";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
-const initPost = [
-  {
-    id: 1,
-    title: "Title",
-    body:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis quaerat autem eos fuga voluptas deserunt laudantium! Similique delectus consequuntur, magni perferendis quam assumenda recusandae, facilis aliquid, eius provident eveniet architecto!"
-  },
-  {
-    id: 2,
-    title: "Title",
-    body:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis quaerat autem eos fuga voluptas deserunt laudantium! Similique delectus consequuntur, magni perferendis quam assumenda recusandae, facilis aliquid, eius provident eveniet architecto!"
-  },
-  {
-    id: 3,
-    title: "Title",
-    body:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis quaerat autem eos fuga voluptas deserunt laudantium! Similique delectus consequuntur, magni perferendis quam assumenda recusandae, facilis aliquid, eius provident eveniet architecto!"
-  },
-  {
-    id: 5,
-    title: "Title",
-    body:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis quaerat autem eos fuga voluptas deserunt laudantium! Similique delectus consequuntur, magni perferendis quam assumenda recusandae, facilis aliquid, eius provident eveniet architecto!"
-  },
-  {
-    id: 6,
-    title: "Title",
-    body:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis quaerat autem eos fuga voluptas deserunt laudantium! Similique delectus consequuntur, magni perferendis quam assumenda recusandae, facilis aliquid, eius provident eveniet architecto!"
-  }
-];
+function App() {
+  const [posts, setPost] = useState([]);
+  const [theme, setTeme] = useState("light");
+  const [check, setCheck] = useState(false);
 
-class App extends React.Component {
-  state = {
-    posts: initPost,
-    theme: "light",
-    check: false
+  const change = () => {
+    setTeme(theme === "light" ? "dark" : "light");
+    setCheck(!check);
   };
 
-  change = () => {
-    this.setState({
-      theme: this.state.theme === "light" ? "dark" : "light",
-      check: !this.state.check
-    });
-  };
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((json) => {
+        setPost(json);
+      });
+  }, []);
 
-  render() {
-    return (
-      <div className={`app ${this.state.theme}`}>
-        <Header check={this.state.check} changeTheme={this.change} />
-        <PostList posts={this.state.posts} />
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className={`app ${theme}`}>
+      <Header check={check} changeTheme={change} />
+      <PostList posts={posts} />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
