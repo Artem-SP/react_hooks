@@ -8,6 +8,7 @@ function App() {
   const [posts, setPost] = useState([]);
   const [theme, setTeme] = useState("light");
   const [check, setCheck] = useState(false);
+  const [type, setType] = useState("posts");
 
   const change = () => {
     setTeme(theme === "light" ? "dark" : "light");
@@ -15,16 +16,24 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    setTimeout(() => {
+      document.title = `Page ${type}`;
+    }, 300);
+
+    fetch(`https://jsonplaceholder.typicode.com/${type}`)
       .then((response) => response.json())
       .then((json) => {
         setPost(json);
       });
-  }, []);
+
+    return () => {
+      document.title = "Page";
+    };
+  }, [type]);
 
   return (
     <div className={`app ${theme}`}>
-      <Header check={check} changeTheme={change} />
+      <Header changeType={setType} check={check} changeTheme={change} />
       <PostList posts={posts} />
       <Footer />
     </div>
