@@ -1,20 +1,36 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useRducer
+} from "react";
 import Header from "./Header";
 import PostList from "./PostList";
 import Footer from "./Footer";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import ThemeContext from "../context";
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "recet":
+      return state;
+
+    default:
+      return state;
+  }
+}
+
 function App() {
   const ref = useRef(null);
-  const [posts, setPost] = useState([]);
-  const [check, setCheck] = useState(false);
-  const [type, setType] = useState("posts");
+  // const [posts, setPost] = useState([]);
+  // const [check, setCheck] = useState(false);
+  // const [type, setType] = useState("posts");
 
   const change = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
+  useRducer(reducer, { posts: [], check: false, type: "post" });
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -52,3 +68,4 @@ function App() {
 }
 
 export default App;
+//export default React.memo(App, () => true)
