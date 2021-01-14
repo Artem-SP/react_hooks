@@ -11,6 +11,10 @@ function App() {
   const [check, setCheck] = useState(false);
   const [type, setType] = useState("posts");
 
+  const change = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
