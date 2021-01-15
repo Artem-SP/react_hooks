@@ -7,7 +7,6 @@ import ThemeContext from "./context";
 
 function Main() {
   const [theme, setTheme] = useState("light");
-
   return (
     <React.StrictMode>
       <ThemeContext.Provider value={{ theme, setTheme }}>
