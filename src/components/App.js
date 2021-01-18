@@ -79,13 +79,9 @@ function App() {
   const handleFocus = () => {
     ref.current.style.color = "red";
   };
-  const setType = useCallback(
-    (type) => {
-      console.log("Memoized");
-      dispatch({ type });
-    },
-    [data.type]
-  );
+  const setType = (type) => {
+    dispatch({ type });
+  };
 
   return (
     <div className={`app ${theme}`}>
