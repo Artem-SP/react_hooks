@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 
 function sum(n) {
-  console.log(n);
   return n + n;
 }
 
 function Post({ title, name, email, body }) {
-  const [num, setNum] = React.useState(0);
-  const [isGreen, setIsGreen] = React.useState(false);
-  const countSum = React.useMemo(() => sum(num), [num]);
-
+  const [num, setNum] = useState(0);
+  const [isGreen, setIsGreen] = useState(false);
+  const countSum = useMemo(() => sum(num), [num]);
   return (
     <div className="article-content">
       <div className="article-title">
@@ -25,7 +23,9 @@ function Post({ title, name, email, body }) {
         {email}
       </p>
       {countSum}
-      <button onClick={() => setNum(num + 1)}>+</button>
+      <button onClick={() => setNum(num + 1)} style={{ marginLeft: "10px" }}>
+        +
+      </button>
     </div>
   );
 }
